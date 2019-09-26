@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+  
+  <title>使用nginx建立WebDAV服务器</title>
+  <meta name="description" content="当时这个事情研究了差不多一个下午。。。花那么长时间的确是因为自己姿势水平不够，对nginx不够熟悉，不过为什么中文的相关资料这么少？是因为nginx用得比较少，还是没有建WebDAV的需求，还是这件事情太简单了都没人愿意说说？真是郁闷。
+
+我的目标是使用nginx建立一个WebDAV服务器，可以进行">
+
+  
+  <meta charset="UTF-8">
+  <meta name="revisit-after" content="1 days">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Zhe">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  
+  <meta itemprop="name" content="使用nginx建立WebDAV服务器">
+  <meta itemprop="description" content="当时这个事情研究了差不多一个下午。。。花那么长时间的确是因为自己姿势水平不够，对nginx不够熟悉，不过为什么中文的相关资料这么少？是因为nginx用得比较少，还是没有建WebDAV的需求，还是这件事情太简单了都没人愿意说说？真是郁闷。
+
+我的目标是使用nginx建立一个WebDAV服务器，可以进行">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://moongazer.me/2014/08/11/build-WebDAV-server-using-nginx/">
+  <meta property="og:title" content="使用nginx建立WebDAV服务器">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="WALL-E">
+  <meta property="og:description" content="当时这个事情研究了差不多一个下午。。。花那么长时间的确是因为自己姿势水平不够，对nginx不够熟悉，不过为什么中文的相关资料这么少？是因为nginx用得比较少，还是没有建WebDAV的需求，还是这件事情太简单了都没人愿意说说？真是郁闷。
+
+我的目标是使用nginx建立一个WebDAV服务器，可以进行">
+
+  
+  <meta name="twitter:title" content="使用nginx建立WebDAV服务器">
+  <meta name="twitter:site" content="WALL-E">
+  <meta name="twitter:url" content="https://moongazer.me/2014/08/11/build-WebDAV-server-using-nginx/">
+  <meta name="twitter:creator" content="Zhe">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="当时这个事情研究了差不多一个下午。。。花那么长时间的确是因为自己姿势水平不够，对nginx不够熟悉，不过为什么中文的相关资料这么少？是因为nginx用得比较少，还是没有建WebDAV的需求，还是这件事情太简单了都没人愿意说说？真是郁闷。
+
+我的目标是使用nginx建立一个WebDAV服务器，可以进行">
+
+  
+  
+
+  
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="使用nginx建立WebDAV服务器">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  
+  <meta name="msvalidate.01" content="">
+  <meta name="yandex-verification" content="">
+  
+
+  
+  <link rel="icon" href="https://moongazer.me/assets/img/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="WALL-E" href="https://moongazer.me/rss.xml">
+
+  
+  <link rel="stylesheet" href="https://moongazer.me/assets/css/prod/style.min.css">
+  <script src="https://moongazer.me/assets/js/prod/prism.min.js"></script>
+  <script src="https://moongazer.me/assets/js/prod/fastclick.min.js"></script>
+  <script src="https://moongazer.me/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+  
+  <header>
+
+    
+    <section>
+
+      
+      <a href="https://moongazer.me"><i class="icon-home"></i></a>
+
+      
+      <div>
+
+        
+        <div class="dt">
+
+          
+          <div class="dtc">
+
+            <h3>WALL-E</h3>
+            <h6>我的经历，感受和想法</h6>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      
+      <a href="mailto:i@lizhe.me"><i class="icon-envelope-o"></i></a>
+
+    </section>
+
+  </header>
+
+  
+  <main>
+
+    
+    <section>
+
+      
+      
+<article>
+
+  
+  <h1>使用nginx建立WebDAV服务器</h1>
+
+  
+  <span class="article__date">
+    
+      11 AUGUST 2014
+    
+  </span>
+
+  
+  <section><p>当时这个事情研究了差不多一个下午。。。花那么长时间的确是因为自己姿势水平不够，对nginx不够熟悉，不过为什么中文的相关资料这么少？是因为nginx用得比较少，还是没有建WebDAV的需求，还是这件事情太简单了都没人愿意说说？真是郁闷。</p>
+
+<p>我的目标是使用nginx建立一个WebDAV服务器，可以进行上传下载等基本的操作，需要有基于用户名和密码的身份验证。由于HTTP访问时的根目录已经有内容了，需要将WebDAV服务器通过某个“子目录”来访问或者通过80以外的端口访问。主要参考了<a href="http://nginx.org/en/docs/http/ngx_http_dav_module.html">官方文档</a>和《<a href="http://blog.csdn.net/jollyjumper/article/details/8977596">nginx webdav配置</a>》这篇文章。</p>
+
+<p>前期准备：如果是通过apt-get安装的nginx，默认已经包含了webdav模块。如果是通过源码编译的，需要在编译时候指定参数：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--with-http_dav_module</span>
+</code></pre></div></div>
+
+<p>通过webdav/这个“子目录”来访问：</p>
+
+<p><span id="more-81"></span></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+location /webdav/ {
+    alias /usr/share/webdav/;
+    autoindex on;
+    dav_methods PUT DELETE MKCOL COPY MOVE;
+    dav_ext_methods PROPFIND OPTIONS;
+    create_full_put_path on;
+    dav_access user:rw group:r all:r;
+    auth_basic &amp;quot;Authorized Users Only&amp;quot;;
+    auth_basic_user_file /usr/lib/squid/passwd;
+}
+
+</code></pre></div></div>
+
+<p>alias后面是文件所在位置，设置autoindex on是为了通过网页访问时可以直接显示索引；create_full_put_path官方的说明为“默认情况下，Put 方法只能在已存在的目录里创建文件。当然了Nginx 必须得有这个目录的修改和写入权限”； auth_basic是提示信息；auth_basic_user_file用于存放加密后的用户名和密码的文件，通过htpasswd命令生成。如果这个工具不存在的话需要安装apache2-utils。</p>
+
+<p>通过端口号访问：新建一个server，其它的基本和前面一样：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+server {
+    listen 9234;
+    error_page 404 /404;
+    error_page 503 /503;
+
+    location / {
+        root /usr/share/webdav;
+        autoindex on;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS;
+        create_full_put_path on;
+        dav_access user:rw group:r all:r;
+        auth_basic &amp;quot;Authorized Users Only&amp;quot;;
+        auth_basic_user_file /usr/lib/squid/passwd;
+    }
+}
+
+</code></pre></div></div>
+</section>
+
+</article>
+
+
+
+
+
+
+
+  
+  <div class="full">
+
+    
+    <div id="disqus_thread" class="mt mb"></div>
+    <script async src="//zooeyg.disqus.com/embed.js"></script>
+
+  </div>
+
+
+
+
+    </section>
+
+  </main>
+
+  
+  <footer>
+
+    
+    <section>
+
+      
+      <div class="dt">
+
+        
+        <div class="dtc h6">
+
+          
+          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2019 &bull; All rights reserved.
+          <br>
+          
+            Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+          
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </footer>
+
+  
+  
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-72170476-4', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  
+
+</body>
+</html>
+

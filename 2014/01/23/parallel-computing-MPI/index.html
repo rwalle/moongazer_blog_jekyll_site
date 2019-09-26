@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+  
+  <title>并行计算方法：MPI框架资料及我的数值实验报告</title>
+  <meta name="description" content="大二下的时候选了数学系的并行计算方法课程，这里将相关的一些资料以及我做的任务、“考试”的报告放上来，希望可以供他人参考。我选择的任务是使用共轭梯度法解线性方程组，最后的“考试”题目是使用共轭梯度法来解决一个$-\Delta u=f$的二维泊松方程。
+
+这门课我们用的是MPI这个框架，相关的参考书有：">
+
+  
+  <meta charset="UTF-8">
+  <meta name="revisit-after" content="1 days">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Zhe">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  
+  <meta itemprop="name" content="并行计算方法：MPI框架资料及我的数值实验报告">
+  <meta itemprop="description" content="大二下的时候选了数学系的并行计算方法课程，这里将相关的一些资料以及我做的任务、“考试”的报告放上来，希望可以供他人参考。我选择的任务是使用共轭梯度法解线性方程组，最后的“考试”题目是使用共轭梯度法来解决一个$-\Delta u=f$的二维泊松方程。
+
+这门课我们用的是MPI这个框架，相关的参考书有：">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://moongazer.me/2014/01/23/parallel-computing-MPI/">
+  <meta property="og:title" content="并行计算方法：MPI框架资料及我的数值实验报告">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="WALL-E">
+  <meta property="og:description" content="大二下的时候选了数学系的并行计算方法课程，这里将相关的一些资料以及我做的任务、“考试”的报告放上来，希望可以供他人参考。我选择的任务是使用共轭梯度法解线性方程组，最后的“考试”题目是使用共轭梯度法来解决一个$-\Delta u=f$的二维泊松方程。
+
+这门课我们用的是MPI这个框架，相关的参考书有：">
+
+  
+  <meta name="twitter:title" content="并行计算方法：MPI框架资料及我的数值实验报告">
+  <meta name="twitter:site" content="WALL-E">
+  <meta name="twitter:url" content="https://moongazer.me/2014/01/23/parallel-computing-MPI/">
+  <meta name="twitter:creator" content="Zhe">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="大二下的时候选了数学系的并行计算方法课程，这里将相关的一些资料以及我做的任务、“考试”的报告放上来，希望可以供他人参考。我选择的任务是使用共轭梯度法解线性方程组，最后的“考试”题目是使用共轭梯度法来解决一个$-\Delta u=f$的二维泊松方程。
+
+这门课我们用的是MPI这个框架，相关的参考书有：">
+
+  
+  
+
+  
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="并行计算方法：MPI框架资料及我的数值实验报告">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  
+  <meta name="msvalidate.01" content="">
+  <meta name="yandex-verification" content="">
+  
+
+  
+  <link rel="icon" href="https://moongazer.me/assets/img/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="WALL-E" href="https://moongazer.me/rss.xml">
+
+  
+  <link rel="stylesheet" href="https://moongazer.me/assets/css/prod/style.min.css">
+  <script src="https://moongazer.me/assets/js/prod/prism.min.js"></script>
+  <script src="https://moongazer.me/assets/js/prod/fastclick.min.js"></script>
+  <script src="https://moongazer.me/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+  
+  <header>
+
+    
+    <section>
+
+      
+      <a href="https://moongazer.me"><i class="icon-home"></i></a>
+
+      
+      <div>
+
+        
+        <div class="dt">
+
+          
+          <div class="dtc">
+
+            <h3>WALL-E</h3>
+            <h6>我的经历，感受和想法</h6>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      
+      <a href="mailto:i@lizhe.me"><i class="icon-envelope-o"></i></a>
+
+    </section>
+
+  </header>
+
+  
+  <main>
+
+    
+    <section>
+
+      
+      
+<article>
+
+  
+  <h1>并行计算方法：MPI框架资料及我的数值实验报告</h1>
+
+  
+  <span class="article__date">
+    
+      23 JANUARY 2014
+    
+  </span>
+
+  
+  <section><p>大二下的时候选了数学系的并行计算方法课程，这里将相关的一些资料以及我做的任务、“考试”的报告放上来，希望可以供他人参考。我选择的任务是使用共轭梯度法解线性方程组，最后的“考试”题目是使用共轭梯度法来解决一个$-\Delta u=f$的二维泊松方程。</p>
+
+<p>这门课我们用的是MPI这个框架，相关的参考书有：张林波的《并行计算导论》，Michael J.Quinn的《MPI与OpenMP并行程序设计(C语言版)》，这两本书都不是很好买，前面那本书似乎已经绝版了，不过想要获取的话是有办法的。前面那本书比较是“导论”，讲得比较粗，后面那本书是以任务为导向的，一边介绍新的函数一边编程，即学即用，这也是外国这类语言教材的特点，我比较喜欢这种方式。在线的资料也有很多，网上关于MPI中的每个函数都有资料，这里推荐中科大网站上的<a href="http://micro.ustc.edu.cn/Linux/MPI/">MPI资料</a>，讲得比较详细，举的例子也很好。老师上课的时候将“张林波在中科院暑期班”的课件直接拿过来用，不知道公开放在这里是否合适，就不上传了，需要的可以再联系我。</p>
+
+<p>并行计算除了MPI还有很多其它框架。实现并行计算也不一定要通过自己编写C语言程序来做，像Matlab也是有并行计算的模块的，似乎计算机系的并行计算课程讲的就是matlab中的并行计算。毕竟这是数学系的数值课程，主要还是自己编程的内容。</p>
+
+<p>选这门课的一共大约20人，实际大约有15人经常到课。据老师的说法，前一年有几个人没有完成“考试”的题目，90分以上大约只有一两个。我最后这门课得了90分，按照往年的情况应该是比较高的。调试这几个程序还是很辛苦的，花了不少功夫。下面将我自己的报告和源程序一起放上来。预条件共轭梯度法矩阵选择我找个时间写一下，是借用网上的某个资料的方法，现在找不到了。各个文件的说明：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>presentation.pdf：上课演示所用PPT
+report.pdf：实验报告
+bcg.c：串行Block CG源程序
+cg.in： 串行CG、并行CG、预条件并行CG输入文件
+mpi_cg.c： 并行CG源程序
+mpi_pcg.c： 预条件并行CG源程序
+bcg.in： 串行Block CG输入文件
+cg.c： 串行CG源程序
+mpi_poisson.c：一维泊松问题并行CG求解
+mpi_poisson_2d.c：二维泊松问题并行CG求解
+poisson.xlsx：一维泊松问题并行运行时间数据
+poisson2d.xlsx：二维泊松问题并行运行时间数据
+</code></pre></div></div>
+
+<p><a href="/contents/2014-01-23-parallel-computing-MPI/cg.zip">cg</a></p>
+
+<p>2019年1月更新：请见Github repo: <a href="https://github.com/rwalle/poisson_mpi">poisson_mpi</a></p>
+</section>
+
+</article>
+
+
+
+
+
+
+
+  
+  <div class="full">
+
+    
+    <div id="disqus_thread" class="mt mb"></div>
+    <script async src="//zooeyg.disqus.com/embed.js"></script>
+
+  </div>
+
+
+
+
+    </section>
+
+  </main>
+
+  
+  <footer>
+
+    
+    <section>
+
+      
+      <div class="dt">
+
+        
+        <div class="dtc h6">
+
+          
+          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2019 &bull; All rights reserved.
+          <br>
+          
+            Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+          
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </footer>
+
+  
+  
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-72170476-4', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  
+
+</body>
+</html>
+
