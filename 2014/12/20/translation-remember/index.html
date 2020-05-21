@@ -11,7 +11,7 @@
   <meta name="revisit-after" content="1 days">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Zhe">
-  <meta name="generator" content="Jekyll v3.8.5">
+  <meta name="generator" content="Jekyll v4.0.1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   
@@ -246,11 +246,11 @@
 
 <p>我 想象有一个小球从圆的右侧开始运动，速度向上，见蓝色的速度矢量$v_1$，球绕着圆逆时针转，它经过最上面一点然后在左边 向下运动，速度为$v_2$，见红色速度矢量。球的速度变了，这意味着它有一个加速度。加速度大小是</p>
 
-<script type="math/tex; mode=display">a=\frac{\Delta v}{\Delta t}</script>
+\[a=\frac{\Delta v}{\Delta t}\]
 
 <p>$\Delta v$很明显是$2v$，而$\Delta t$是经过半个圆周花费的时间，它的值是$\frac{\text{distance}}{\text{speed}}= \frac{\pi r}{v}$。因此，加速度是</p>
 
-<script type="math/tex; mode=display">a=\frac{2v}{\pi r/v}=\frac{2v^2}{\pi r} \approx 0.64 \frac{v^2}{r}</script>
+\[a=\frac{2v}{\pi r/v}=\frac{2v^2}{\pi r} \approx 0.64 \frac{v^2}{r}\]
 
 <p>这不正确。正确答案是$v^2/r$。多了一个$\frac{2}{\pi}$的系数。</p>
 
@@ -262,11 +262,11 @@
 
 <p>用相同的方法可以得到</p>
 
-<script type="math/tex; mode=display">a=\frac{\Delta v}{\Delta t}=\frac{2\sqrt{2}v^2}{\pi r} \approx 0.90 \frac{v^2}{r}</script>
+\[a=\frac{\Delta v}{\Delta t}=\frac{2\sqrt{2}v^2}{\pi r} \approx 0.90 \frac{v^2}{r}\]
 
 <p>这个更接近正确结果。如果你想要计算$\frac{1}{8}$个圆周的情况，得到的是</p>
 
-<script type="math/tex; mode=display">a=\frac{4\sqrt{2-\sqrt{2}}v^2}{\pi r} \approx 0.97 \frac{v^2}{r}</script>
+\[a=\frac{4\sqrt{2-\sqrt{2}}v^2}{\pi r} \approx 0.97 \frac{v^2}{r}\]
 
 <p>这时你就会明白，你应该做的是取小球经过无限小部分圆周时的极限结果。（顺便说下，如果我以前聪明一点的话，也许就会这样发现<a href="http://en.wikipedia.org/wiki/Vi%C3%A8te%27s_formula">韦达公式</a>之类的东西。我现在会意识这一点仅仅是因为我见过韦达公式。所以记忆多多少少会帮助你在事物之间建立联系，只不过它不像初学者们认为得那么重要。）</p>
 
@@ -276,15 +276,15 @@
 
 <p>以及</p>
 
-<script type="math/tex; mode=display">\Delta v=2\sin \frac{\theta}{2} v</script>
+\[\Delta v=2\sin \frac{\theta}{2} v\]
 
 <p>当$\theta \rightarrow 0$时得到</p>
 
-<script type="math/tex; mode=display">\Delta v=\theta v</script>
+\[\Delta v=\theta v\]
 
 <p>以及</p>
 
-<script type="math/tex; mode=display">a=\frac{\Delta v}{\Delta t}=\frac{\theta v}{\frac{\theta r}{v}}=\frac{v^2}{r}</script>
+\[a=\frac{\Delta v}{\Delta t}=\frac{\theta v}{\frac{\theta r}{v}}=\frac{v^2}{r}\]
 
 <p>但我花了很长时间才想到这些，并一点点地综合起来。在我搞明白这些之后，我可以看出这里面牵涉到很多的概念。实际上，如果你刚开始学物理，很可能你看不太懂这里面的一些内容，因为我跳过了一些步骤。</p>
 
@@ -525,7 +525,7 @@
         <div class="dtc h6">
 
           
-          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2019 &bull; All rights reserved.
+          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2020 &bull; All rights reserved.
           <br>
           
             Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.

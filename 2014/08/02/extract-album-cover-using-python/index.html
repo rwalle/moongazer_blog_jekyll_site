@@ -13,7 +13,7 @@
   <meta name="revisit-after" content="1 days">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Zhe">
-  <meta name="generator" content="Jekyll v3.8.5">
+  <meta name="generator" content="Jekyll v4.0.1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   
@@ -148,9 +148,9 @@
 <span class="kn">from</span> <span class="nn">mutagen.mp4</span> <span class="kn">import</span> <span class="n">MP4</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span>
 
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span>
-  <span class="n">path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-  <span class="n">pathlist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\\</span><span class="s">'</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">pathlist</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\\</span><span class="s">'</span><span class="p">)</span>
   <span class="n">imagepath</span> <span class="o">=</span> <span class="s">''</span>
   <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">pathlist</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
   <span class="n">imagepath</span> <span class="o">=</span> <span class="n">imagepath</span> <span class="o">+</span> <span class="n">sec</span> <span class="o">+</span> <span class="s">'</span><span class="se">\\</span><span class="s">'</span>
@@ -158,32 +158,32 @@
 <span class="k">else</span><span class="p">:</span>
   <span class="k">print</span><span class="p">(</span><span class="s">'No argument'</span><span class="p">)</span>
   <span class="nb">raw_input</span><span class="p">()</span>
-  <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+  <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s">'m4a'</span><span class="p">:</span>
   <span class="nb">file</span> <span class="o">=</span> <span class="n">MP4</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
   <span class="k">try</span><span class="p">:</span>
-    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s">'covr'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">tags</span><span class="p">[</span><span class="s">'covr'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
   <span class="k">except</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'Cover Not Found'</span><span class="p">)</span>
     <span class="nb">raw_input</span><span class="p">()</span>
-    <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 <span class="k">elif</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s">'mp3'</span><span class="p">:</span>
   <span class="nb">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
   <span class="k">try</span><span class="p">:</span>
-    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s">'APIC:'</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">tags</span><span class="p">[</span><span class="s">'APIC:'</span><span class="p">].</span><span class="n">data</span>
   <span class="k">except</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'Cover Not Found'</span><span class="p">)</span>
     <span class="nb">raw_input</span><span class="p">()</span>
-    <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="k">print</span><span class="p">(</span><span class="s">'Filetype Not Supported'</span><span class="p">)</span>
   <span class="nb">raw_input</span><span class="p">()</span>
-  <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+  <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 
 <span class="k">try</span><span class="p">:</span>
   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">img</span><span class="p">:</span>
-    <span class="n">img</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">artwork</span><span class="p">)</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">artwork</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
   <span class="k">print</span><span class="p">(</span><span class="s">'Write Error'</span><span class="p">)</span>
   <span class="nb">raw_input</span><span class="p">()</span>
@@ -195,26 +195,26 @@
 
 <p><strong>更新</strong>：建了一个字典，仅仅使用File类，同时考虑到奇葩大写扩展名的存在，这样下来代码简单了一些，把第17到36行修改之后的部分贴出来吧</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:].</span><span class="n">lower</span><span class="p">()</span>
 <span class="n">key_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s">'m4a'</span><span class="p">:</span><span class="s">'covr'</span><span class="p">,</span> <span class="s">'mp3'</span><span class="p">:</span><span class="s">'APIC:'</span><span class="p">}</span>
 
 <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">key_mapping</span><span class="p">:</span>
   <span class="nb">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
   <span class="k">try</span><span class="p">:</span>
-    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key_mapping</span><span class="p">[</span><span class="n">ext</span><span class="p">]]</span>
+    <span class="n">artwork</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key_mapping</span><span class="p">[</span><span class="n">ext</span><span class="p">]]</span>
   <span class="k">except</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'Cover Not Found'</span><span class="p">)</span>
     <span class="nb">raw_input</span><span class="p">()</span>
-    <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="k">print</span><span class="p">(</span><span class="s">'Filetype Not Supported'</span><span class="p">)</span>
   <span class="nb">raw_input</span><span class="p">()</span>
-  <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">()</span>
+  <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">ext</span><span class="o">==</span><span class="s">'m4a'</span><span class="p">:</span>
   <span class="n">artwork</span> <span class="o">=</span> <span class="n">artwork</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">artwork</span> <span class="o">=</span> <span class="n">artwork</span><span class="o">.</span><span class="n">data</span>
+  <span class="n">artwork</span> <span class="o">=</span> <span class="n">artwork</span><span class="p">.</span><span class="n">data</span>
 </code></pre></div></div>
 </section>
 
@@ -255,7 +255,7 @@
         <div class="dtc h6">
 
           
-          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2019 &bull; All rights reserved.
+          <a href="https://moongazer.me" class="h6">WALL-E</a> &copy; 2020 &bull; All rights reserved.
           <br>
           
             Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
